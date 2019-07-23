@@ -12,7 +12,7 @@ Names are as important in Go as in any other language. They even have semantic e
 
 When a package is imported, the package name becomes an accessor for the contents. After
 
-当 import 一个包之后，包名就会成了这个package中内容的访问器。在写了下面这句 import 之后，
+当 `import` 一个包之后，包名就会成了这个 package 中内容的访问器(*accessor method, 类似于Java中的getter，意为通过这个package的名字，就可以访问这个package中的所有可见的类型、变量、方法等*）。在写了下面这句 `import` 之后，
 
 ``` go
 import "bytes"
@@ -20,7 +20,7 @@ import "bytes"
 
 the importing package can talk about <i>bytes.Buffer</i>. It's helpful if everyone using the package can use the same name to refer to its contents, which implies that the package name should be good: short, concise, evocative. By convention, packages are given lower case, single-word names; there should be no need for underscores or mixedCaps. Err on the side of brevity, since everyone using your package will be typing that name. And don't worry about collisions a priori. The package name is only the default name for imports; it need not be unique across all source code, and in the rare case of a collision the importing package can choose a different name to use locally. In any case, confusion is rare because the file name in the import determines just which package is being used.
 
-当前 import 了 bytes 的包（<font color="blue">即调用者</font>），就可以使用 bytes.Buffer 来（<font color="blue">访问 bytes 包中的诸如 Buffer 的内容，即被调用者</font>)。 若所有人都能以相同的名称来引用其内容，这将大有裨益，因此，包应当有个恰当的名称：其名称应该简洁明了而易于理解。按照惯例， 包应当以小写的单个单词来命名，且不应使用下划线或驼峰记法。err 的命名就是出于简短考虑的，因为任何使用该包的人都会键入该名称。 不必担心引用次序的冲突。包名就是导入时所需的唯一默认名称， 它并不需要在所有源码中保持唯一，即便在少数发生冲突的情况下， 也可为导入的包选择一个别名来局部使用。 无论如何，通过文件名来判定使用的包，都是不会产生混淆的。
+当前 import 了 bytes 的包（*即调用者*），就可以使用 bytes.Buffer 了（*意为，可用 bytes.\* 来访问 bytes 包中的可见物，即被调用者*)。 如果所有人都能以相同的名称来引用其内容，这将大有裨益，这也就要求 package 应该有个好的名字：short(*名字不要太长，从而书写起来简单*）, concise（*有准确的含义，不能太笼统或模糊*), evocative(*bringing strong images, memories, or feelings to mind. 当看到这个名字，就很容易知道其含义*)。习惯上（*或约定俗成地*)，应该给 package 指定小写字母的、单个单词的名字；不需要使用下划线、或者驼峰记法。因此要尽量保持简洁，不要命名太复杂，毕竟使用你的package的每个人都要输入这个名字。另外，不要考虑package name会引起冲突（*即和其他的package有重名的问题，接下来就说明了为什么不用担心，以及如何解决冲突的方法*）。package name只是import后的缺省名字；在所有的源代码中，不一定要保持唯一；在少数情况下，有名称冲突的时候，import 的 package 可以选择一个不同的名字，在这个局部的地方就用这个修改后的名字（*所谓locally，是相对于整个project而言，在有冲突的某一个或几个文件中，可以使用一个不同的名字*)。 不论哪种情况，都很难出现混淆的情况，——因为 `import` 中的文件名决定了到底使用的是哪个 package。
 
 Another convention is that the package name is the base name of its source directory; the package in src/encoding/base64 is imported as "encoding/base64" but has name base64, not encoding_base64 and not encodingBase64.
 
