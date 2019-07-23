@@ -4,7 +4,7 @@
 
 Names are as important in Go as in any other language. They even have semantic effect: the visibility of a name outside a package is determined by whether its first character is upper case. It's therefore worth spending a little time talking about naming conventions in Go programs.
 
-正如命名在其它语言中的地位，它在 Go 中同样重要。有时它们甚至会影响语义： 例如，某个名称在包外是否可见，就取决于其首个字符是否为大写字母。 因此有必要花点时间来讨论 Go 程序中的命名约定。
+正如命名在其它语言中的地位，它在 Go 中同样重要。它们甚至会影响语义： 一个名称在包外的可见性，是由其首个字符是否为大写字母而确定的。 因此，有必要花点时间来讨论 Go 程序中的命名约定。
 
 ### Package names
 
@@ -12,14 +12,15 @@ Names are as important in Go as in any other language. They even have semantic e
 
 When a package is imported, the package name becomes an accessor for the contents. After
 
-当一个包被导入后，包名就会成了内容的访问器。在
+当 import 一个包之后，包名就会成了这个package中内容的访问器。在写了下面这句 import 之后，
 
 ``` go
 import "bytes"
 ```
-the importing package can talk about bytes.Buffer. It's helpful if everyone using the package can use the same name to refer to its contents, which implies that the package name should be good: short, concise, evocative. By convention, packages are given lower case, single-word names; there should be no need for underscores or mixedCaps. Err on the side of brevity, since everyone using your package will be typing that name. And don't worry about collisions a priori. The package name is only the default name for imports; it need not be unique across all source code, and in the rare case of a collision the importing package can choose a different name to use locally. In any case, confusion is rare because the file name in the import determines just which package is being used.
 
-之后，被导入的包就能通过 bytes.Buffer 来引用了。 若所有人都能以相同的名称来引用其内容，这将大有裨益，因此，包应当有个恰当的名称：其名称应该简洁明了而易于理解。按照惯例， 包应当以小写的单个单词来命名，且不应使用下划线或驼峰记法。err 的命名就是出于简短考虑的，因为任何使用该包的人都会键入该名称。 不必担心引用次序的冲突。包名就是导入时所需的唯一默认名称， 它并不需要在所有源码中保持唯一，即便在少数发生冲突的情况下， 也可为导入的包选择一个别名来局部使用。 无论如何，通过文件名来判定使用的包，都是不会产生混淆的。
+the importing package can talk about <i>bytes.Buffer</i>. It's helpful if everyone using the package can use the same name to refer to its contents, which implies that the package name should be good: short, concise, evocative. By convention, packages are given lower case, single-word names; there should be no need for underscores or mixedCaps. Err on the side of brevity, since everyone using your package will be typing that name. And don't worry about collisions a priori. The package name is only the default name for imports; it need not be unique across all source code, and in the rare case of a collision the importing package can choose a different name to use locally. In any case, confusion is rare because the file name in the import determines just which package is being used.
+
+当前 import 了 bytes 的包（<font color="blue">即调用者</font>），就可以使用 bytes.Buffer 来（<font color="blue">访问 bytes 包中的诸如 Buffer 的内容，即被调用者</font>)。 若所有人都能以相同的名称来引用其内容，这将大有裨益，因此，包应当有个恰当的名称：其名称应该简洁明了而易于理解。按照惯例， 包应当以小写的单个单词来命名，且不应使用下划线或驼峰记法。err 的命名就是出于简短考虑的，因为任何使用该包的人都会键入该名称。 不必担心引用次序的冲突。包名就是导入时所需的唯一默认名称， 它并不需要在所有源码中保持唯一，即便在少数发生冲突的情况下， 也可为导入的包选择一个别名来局部使用。 无论如何，通过文件名来判定使用的包，都是不会产生混淆的。
 
 Another convention is that the package name is the base name of its source directory; the package in src/encoding/base64 is imported as "encoding/base64" but has name base64, not encoding_base64 and not encodingBase64.
 
