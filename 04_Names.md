@@ -24,7 +24,13 @@ the importing package can talk about <i>bytes.Buffer</i>. It's helpful if everyo
 
 Another convention is that the package name is the base name of its source directory; the package in src/encoding/base64 is imported as "encoding/base64" but has name base64, not encoding_base64 and not encodingBase64.
 
-另一个约定就是包名应为其源码目录的基本名称。在 src/pkg/encoding/base64 中的包应作为 "encoding/base64" 导入，其包名应为 base64， 而非 encoding_base64 或 encodingBase64。
+另一个约定就是，package name是其源代码目录的base name；例如，对于src/encoding/base64 目录下的package，在 import 它的时候，使用 "encoding/base64"，即
+
+```go
+import "encoding/base64"
+```
+
+package 的名字是 base64，而不是 encoding_base64 或 encodingBase64。
 
 The importer of a package will use the name to refer to its contents, so exported names in the package can use that fact to avoid stutter. (Don't use the import . notation, which can simplify tests that must run outside the package they are testing, but should otherwise be avoided.) For instance, the buffered reader type in the bufio package is called Reader, not BufReader, because users see it as bufio.Reader, which is a clear, concise name. Moreover, because imported entities are always addressed with their package name, bufio.Reader does not conflict with io.Reader. Similarly, the function to make new instances of ring.Ring—which is the definition of a constructor in Go—would normally be called NewRing, but since Ring is the only type exported by the package, and since the package is called ring, it's called just New, which clients of the package see as ring.New. Use the package structure to help you choose good names.
 
